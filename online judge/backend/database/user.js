@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
         required:true,
         default:null
     },
+    middlename:{
+        type:String,
+        default:null
+    },
     lastname:{
         type:String,
         default:null
