@@ -22,7 +22,7 @@ DBConnection();
 app.post('/register',async (req,res)=>{
     try {
         //get all details of user from user-> stored in req.body
-        console.log(req);
+        //console.log(req);
         const {firstname,middlename,lastname,email,password} = req.body;
 
         //check for empty fields:if any then give flag
@@ -32,7 +32,7 @@ app.post('/register',async (req,res)=>{
 
         //check if user already exists in DB
         const ifExisting = await User.findOne({email})//as email parameter is set to unique
-        console.log(ifExisting);
+        //console.log(ifExisting);
         if(ifExisting){
             return res.send('This user already exists! Please try to login');
         }
