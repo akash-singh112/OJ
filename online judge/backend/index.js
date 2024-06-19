@@ -5,6 +5,7 @@ const User = require('./database/user.js');
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
+const cors = require('cors');
 dotenv.config();
 
 const port = 8080;
