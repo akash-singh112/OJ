@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors');
 dotenv.config();
 
-const port = 8080;
+//run on http://localhost:8080/{ur_wish}
 const app = express();
 
 //add middlewares
@@ -115,7 +115,7 @@ app.get('/:universalURL',(req,res)=>{
     res.end()
 })
 
-app.listen(port,()=>{
-    console.log('Server is listening to port 5500');
+app.listen(process.env.port,()=>{
+    console.log(`Server is listening to port ${process.env.port}`);
 })
 
