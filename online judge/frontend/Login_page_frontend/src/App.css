@@ -88,3 +88,9 @@ body{
 .register_link p a:hover{
   text-decoration: underline;
 }
+
+.response p{
+  justify-content: center;
+  text-align: center;
+  color: green;
+}
