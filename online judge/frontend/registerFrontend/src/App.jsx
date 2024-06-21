@@ -1,4 +1,7 @@
 import { useState , useEffect } from 'react'
+import { Icon } from 'react-icons-kit'
+import {locked} from 'react-icons-kit/iconic/locked'
+import {unlocked} from 'react-icons-kit/iconic/unlocked'
 import {sendDataFromFrontendToBackend} from '../api_link/api_register.js'
 import './App.css'
 
@@ -13,8 +16,11 @@ function App() {
     email:'',
     password:''
   });
+  const [icon,setIcon] = useState(locked);
+  const [switch1,setSwitch] = useState('password');
 
   const handleChange = (e) =>{
+    //fetch current field being modified and its value//
     const {name,value} = e.target;
     setDetails(prev => {
       return {...prev,[name]:value};
@@ -30,6 +36,11 @@ function App() {
     
     const response = await sendDataFromFrontendToBackend(details);
     console.log(response);
+  }
+
+  const handleToggle = ()=>{
+    setSwitch(prev => prev=='password' ? 'text' : 'password');
+    setIcon(prev => prev==locked ? unlocked : locked);
   }
 
   return (
@@ -53,8 +64,8 @@ function App() {
           <i className='bx bxs-envelope'></i>
         </div>
         <div className="fields">
-          <input type="password" name='password' placeholder='Password' required minLength='6' onChange={handleChange}/>
-          <i className='bx bxs-lock-alt'></i>
+          <input type={switch1} name='password' placeholder='Password' required minLength='6' onChange={handleChange}/>
+          <span onClick={handleToggle}><Icon icon={icon}></Icon></span>
         </div>
         <button className="button1">Register</button>
       </form>

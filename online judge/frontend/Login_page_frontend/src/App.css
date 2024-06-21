@@ -94,3 +94,7 @@ body{
   text-align: center;
   color: green;
 }
+
+.hide{
+  visibility: hidden;
+}

@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors');
 dotenv.config();
 
-//run on http://localhost:8080/{ur_wish}
+//run on http://localhost:port/{ur_wish}
 const app = express();
 
 //add middlewares

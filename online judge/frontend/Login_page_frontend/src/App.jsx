@@ -1,5 +1,7 @@
-import { useRef, useState } from 'react'
-import boxicons from 'boxicons'
+import { useState } from 'react'
+import { Icon } from 'react-icons-kit'
+import {locked} from 'react-icons-kit/iconic/locked'
+import {unlocked} from 'react-icons-kit/iconic/unlocked'
 import {sendDataFromFrontendToBackend} from '../api_link/api_link_login.js'
 import './App.css'
 
@@ -13,6 +15,8 @@ function App() {
     password:'',
   });
   const [result,setResult] = useState('');
+  const [icon,setIcon] = useState(locked);
+  const [switch1,setSwitch] = useState('password');
 
   const handleChange = (e)=>{
     const {name,value} = e.target;
@@ -32,6 +36,11 @@ function App() {
     setResult(response.message);
   }
 
+  const handleSwitch = ()=>{
+    setSwitch(prev => prev=='password' ? 'text' : 'password');
+    setIcon(prev => prev==locked ? unlocked : locked);
+  }
+
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
@@ -41,15 +50,15 @@ function App() {
             <i className='bx bxs-user'></i>
         </div>
         <div className="ip_box">
-            <input type="password" name='password' placeholder='Password' required onChange={handleChange}/>
-            <i className='bx bx-lock'></i>
+            <input type={switch1} name='password' placeholder='Password' id='pass' required onChange={handleChange}/>
+            <span onClick={handleSwitch}><Icon icon={icon}></Icon></span>
         </div>
         <button type='submit' className='button1'>Login</button>
         <div className="register_link">
-          <p>Don't have an account?<a href="http://localhost:2070/register">Register</a></p>
+          <p>Don't have an account?   <a href="http://localhost:2070/register">Register</a></p>
         </div>
         <div className="response">
-          <p>{result}!</p>
+          <p>{result}</p>
         </div>
       </form>
     </div>
