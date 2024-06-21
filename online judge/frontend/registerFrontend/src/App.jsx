@@ -1,6 +1,10 @@
 import { useState , useEffect } from 'react'
+import {sendDataFromFrontendToBackend} from '../api_link/api_register.js'
 import './App.css'
 
+
+//localhost 2070 for register frontend
+//localhost 8800 for register backend
 function App() {
   const [details,setDetails] = useState({
     firstname:'',
@@ -15,11 +19,17 @@ function App() {
     setDetails(prev => {
       return {...prev,[name]:value};
     });
+    console.log(e);
   }
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
+    //prevents default behaviour of refereshing the page on submitting form//
+    
     e.preventDefault();
     console.log(details);
+    
+    const response = await sendDataFromFrontendToBackend(details);
+    console.log(response);
   }
 
   return (
@@ -28,23 +38,23 @@ function App() {
         <h1>Register</h1>
         <div className="fields">
           <input type="text" name='firstname' placeholder='First Name' required onChange={handleChange}/>
-          <i class='bx bxs-user-account'></i>
+          <i className='bx bxs-user-account'></i>
         </div>
         <div className="fields">
           <input type="text" name='middlename' placeholder='Middle Name' onChange={handleChange}/>
-          <i class='bx bx-user-circle'></i>
+          <i className='bx bx-user-circle'></i>
         </div>
         <div className="fields">
           <input type="text" name='lastname' placeholder='Last Name' onChange={handleChange}/>
-          <i class='bx bx-user-circle'></i>
+          <i className='bx bx-user-circle'></i>
         </div>
         <div className="fields">
           <input type="email" name='email' placeholder='Email-ID' required onChange={handleChange}/>
-          <i class='bx bxs-envelope'></i>
+          <i className='bx bxs-envelope'></i>
         </div>
         <div className="fields">
-          <input type="password" name='password' placeholder='Password' required minlength='6' onChange={handleChange}/>
-          <i class='bx bxs-lock-alt'></i>
+          <input type="password" name='password' placeholder='Password' required minLength='6' onChange={handleChange}/>
+          <i className='bx bxs-lock-alt'></i>
         </div>
         <button className="button1">Register</button>
       </form>
