@@ -15,12 +15,10 @@ const generateExtension = (lang)=>{
     if(lang==='python'||lang==='py')return 'py';
 }
 
-const executeCpp = async (filePath,lang,inputFile)=>{
+const executeCpp = async (filePath,inputFile)=>{
     //first we rename our executable to uuid.exe instead of a.exe
-    const extension = generateExtension(lang);
-    //console.log(extension);
     //extract uuid from filePath
-    const uniqueid = path.basename(filePath,`.${extension}`);
+    const uniqueid = path.basename(filePath,`.cpp`);
     //console.log(uniqueid);
     //append .exe to make as executable file
     const executableName = `${uniqueid}.exe`;

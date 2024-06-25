@@ -1,6 +1,8 @@
 const express = require('express');
 const {generateFilePath} = require('./genpath.js');
 const {executeCpp} = require('./execCpp.js')
+const {executeJava} = require('./execJava.js')
+const {executePy} = require('./execPy.js')
 const app = express();
 
 //port 1010 for compiler backend
@@ -16,7 +18,7 @@ app.get('/',(req,res)=>{
 })
 
 const generateExtension = (lang)=>{
-    if(lang==='cpp'||lang==='cplusplus'||lang=='C++')return 'cpp';
+    if(lang==='cpp'||lang==='cplusplus'||lang=='C++'||lang==='c++')return 'cpp';
     if(lang==='Java'||lang==='java')return 'java';
     if(lang==='python'||lang==='py')return 'py';
 }
@@ -39,9 +41,9 @@ app.post('/run',async (req,res)=>{
         const extension = generateExtension(lang);
         var output;
         switch (extension) {
-            case 'cpp': output = await executeCpp(filePath,lang,inputFile);break;
-            //case 'java': output = executeJava(filePath,lang,inputFile);break;
-            //case 'py' : output = executePy(filePath,lang,inputFile);break;
+            case 'cpp': output = await executeCpp(filePath,inputFile);break;
+            case 'java': output = await executeJava(filePath,inputFile);break;
+            case 'py' : output = await executePy(filePath,inputFile);break;
         }
         console.log(output);
         res.send({output});

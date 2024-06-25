@@ -3,9 +3,10 @@ const path = require('path');
 const {exec} = require('child_process');
 //child_process is like a reference to actual terminal/shell
 
-const executeJava = async (filePath,inputFile)=>{
+const executePy = async (filePath,inputFile)=>{
     //run shell command with command
-    const command = `java ${filePath}`;
+    const command = `python ${filePath}`;
+    console.log(filePath);
     return new Promise((resolve,reject)=>{
         const process = exec(command,(err,stdout,stderr)=>{
             if(err){
@@ -21,4 +22,4 @@ const executeJava = async (filePath,inputFile)=>{
     })
 }
 
-module.exports = {executeJava};
+module.exports = {executePy};
