@@ -1,13 +1,12 @@
-const mongoose = require('mongoose');
 const User = require('./problemSchema.js');
-const {DBConnection} = require('./problem_server.js');
+const {DBConnectionProblemSet} = require('./problem_server.js');
 
-DBConnection();
+DBConnectionProblemSet();
 
 // User.createProblem({
 //     tags:['math','combinatorics','number-theory'],
 //     difficulty:1400,
-//     problem_name:'Coin Combinations I',
+//     problem_name:'Coin Combinations 69',
 //     description:'Let D(n) represent the sum of digits of n. For how many integers n where 10^l ≤ n < 10^r satisfy D(k⋅n)=k⋅D(n)? Output the answer modulo 10^9+7',
 //     constraints:{
 //         time_limit_per_test:'1s',
@@ -26,6 +25,7 @@ DBConnection();
 //     const entry = await User.findbyName('Counting Rooms');
 //     console.log(entry);
 // }
+
 // run();
 
 

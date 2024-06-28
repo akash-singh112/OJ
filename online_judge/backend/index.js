@@ -7,6 +7,9 @@ const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const cors = require('cors');
 dotenv.config();
+const User1 = require('./problem-set/problemSchema.js')
+const {DBConnectionProblemSet} = require('./problem-set/problem_server.js');
+const mongoose = require('mongoose');
 
 //run on http://localhost:port/{ur_wish}
 const app = express();
@@ -23,6 +26,8 @@ app.get('/home',(req,res)=>{
 });
 
 DBConnection();
+DBConnectionProblemSet();
+
 app.post('/register',async (req,res)=>{
     try {
         //get all details of user from user-> stored in req.body
@@ -90,6 +95,9 @@ app.post('/login',async (req,res)=>{
             return res.status(400).send('Incorrect password');
         }
 
+        //find name of user
+        const name11 = user.firstname;
+
         //generate jwt token for secure access
         const tkn = jwt.sign({id:user._id},process.env.SECRET_KEY,{
             expiresIn:'1h'
@@ -99,14 +107,45 @@ app.post('/login',async (req,res)=>{
 
         //store cookies and send successful login message
         res.status(200).cookie('cookie1',tkn,{ maxAge : 360000 , httpOnly:true }).json({
-            message:'Login successful',
+            message:'Login successful!',
             success:true,
-            tkn
+            name:name11,
         });
 
     } catch (error) {
         //console.log('galat hai aap');
         console.log(error.message);
+    }
+})
+
+app.post('/home/welcome/addprob',async (req,res)=>{
+    try {
+        const {tags,difficulty,problem_name,description,value_constraints,input_description,output_description,sampleTestCases,outputOfsampleTestCases,hiddenTestCases,outputOfhiddenTestCases} = req.body;
+        User1.createProblem({
+            tags:tags,
+            difficulty:difficulty,
+            problem_name:problem_name,
+            description:description,
+            value_constraints:value_constraints,
+            input_description:input_description,
+            output_description:output_description,
+            sampleTestCases:sampleTestCases,
+            outputOfsampleTestCases:outputOfsampleTestCases,
+            hiddenTestCases:hiddenTestCases,
+            outputOfhiddenTestCases:outputOfhiddenTestCases
+        });
+        console.log('yahan hu');
+
+        const added_prob = await User1.where('problem_name').equals('Counting Rooms').limit(1);
+
+        console.log('Added prob',added_prob);
+
+    res.status(200).json({message:'Problem addition successful!',
+        success:true,
+        data:added_prob
+    })
+    } catch (error) {
+        console.error(error.message);
     }
 })
 

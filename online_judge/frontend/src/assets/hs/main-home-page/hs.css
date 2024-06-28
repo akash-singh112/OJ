@@ -1,0 +1,38 @@
+.whole3{
+  background: bisque;
+  transition: 0.5s;
+}
+
+.container3{
+  width: 100vw;
+  min-height: 100vh;
+  transition: 500ms;
+}
+
+.darkmode{
+  background: #222;
+}
+
+.abouttxt{
+  margin-bottom: 500px;
+  text-align: left;
+  margin: 200px;
+  margin-top: 100px;
+  line-height: 2;
+}
+
+.whity{
+  color:white;
+}
+
+.blacky{
+  color:black;
+}
+
+.miniheader{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-top: 60px;
+  margin-left: 200px;
+  text-align: left;
+  font-size: 50px;
+}

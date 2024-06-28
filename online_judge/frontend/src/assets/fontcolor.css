@@ -1,0 +1,9 @@
+.container{
+    color: white;
+    text-align: center;
+    justify-content: center;
+    font-weight: normal;
+}
+.container .clickable{
+    color:green
+}

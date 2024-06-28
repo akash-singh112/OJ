@@ -1,19 +1,5 @@
 const mongoose = require('mongoose')
 
-const tight = new mongoose.Schema({
-    time_limit_per_test:{//in seconds
-        type:String,
-        default:1
-    },
-    value_constraints:{//constraints on t,n,m,k,q etc
-        type:[String]
-    },
-    space_limit_per_test:{//in MB
-        type:String,
-        default:128
-    }
-})
-
 const userSchema = new mongoose.Schema({
     problem_status:{
         //0=unsolved and not marked for solve later
@@ -40,8 +26,9 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    constraints:{
-        type:tight
+    value_constraints:{
+        type:[String],
+        required:true
     },
     input_description:String,
     output_description:String,
@@ -54,7 +41,7 @@ const userSchema = new mongoose.Schema({
 userSchema.statics.createProblem = async function(entireProblem){
     await this.create(entireProblem);
     //await this.save();
-    console.log(entireProblem);
+    //console.log(entireProblem);
 }
 
 userSchema.statics.findviaId = async function(id){//also remember to use await before calling this function
@@ -67,4 +54,4 @@ userSchema.statics.findbyName = async function(name){
     return user;
 }
 
-module.exports = mongoose.model('User',userSchema);
+module.exports = mongoose.model('User1',userSchema);
