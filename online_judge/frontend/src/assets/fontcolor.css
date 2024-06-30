@@ -1,9 +1,23 @@
-.container{
-    color: white;
-    text-align: center;
+.whole77{
+    display:flex;
     justify-content: center;
-    font-weight: normal;
+    align-items: center;
+    min-height: 100vh;
+    background: url('./login-page.jpg');
+    background-position: center;
+    background-size: cover;
 }
-.container .clickable{
+
+.container77{
+    width:420px;
+    background: transparent;
+    border: 2px solid rgba(0,0,0,0.2);
+    color: white;
+    border-radius: 10px;
+    padding: 30px 40px;
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+.container77 .clickable{
     color:green
 }

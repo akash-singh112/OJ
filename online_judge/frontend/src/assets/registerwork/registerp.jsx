@@ -41,7 +41,7 @@ export function Register() {
     console.log(response);
 
     setTimeout(()=>{
-      navigate('/home/login')
+      navigate('/login')
     },2000)
   }
 
@@ -92,7 +92,7 @@ export function Register() {
           </div>
         </div>
         <button className="button1">Register</button>
-        <p id='proclog'>If you have completed registration,proceed to <Link to='/home/login' id='t6'>Login</Link></p>
+        <p id='proclog'>If you have completed registration,proceed to <Link to='/login' id='t6'>Login</Link></p>
       </form>
     </div>
     </div>

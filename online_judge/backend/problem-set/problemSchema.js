@@ -40,7 +40,6 @@ const userSchema = new mongoose.Schema({
 
 userSchema.statics.createProblem = async function(entireProblem){
     await this.create(entireProblem);
-    //await this.save();
     //console.log(entireProblem);
 }
 

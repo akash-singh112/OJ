@@ -14,7 +14,7 @@ export function HomeScreen(){
 
     return(
         <div className={`whole3 ${state}`}>
-            <div className={`container3`}>
+            <div className={`container3 ${state}`}>
                 <Navbar state={state} setState={setState}/>
                 <h2 className={`miniheader ${kolor}`}>Abstract</h2>
                 <p className={`abouttxt ${kolor}`}>CodeCat is an Online Judge where users can enhance their 

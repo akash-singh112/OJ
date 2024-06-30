@@ -25,7 +25,7 @@ export function Navbar({state,setState}){
 
     const logOut = ()=>{
         localStorage.clear();
-        navigate('/home/login');
+        navigate('/login');
     }
 
     return(
@@ -33,11 +33,12 @@ export function Navbar({state,setState}){
             <div id='navcol' className="container4">
                 <Link onClick={handleLogoClick}><img src={leenk}  id='logo' width={150}/></Link>
                 <ul id='lists'>
-                    <li className='listpt'>Problemset</li>
-                    <li className='listpt'>Recent contests</li>
-                    <li className='listpt'>Solved Problems</li>
-                    <li className='listpt'>Add a question/problem</li>
+                    <li className='listpt'><Link to='/ps' className='lenktab'>Problemset</Link></li>
+                    <li className='listpt'><Link to='/rec-con' className='lenktab'>Recent Contests</Link></li>
+                    <li className='listpt'><Link to='/solv-prob' className='lenktab'>Solved Problems</Link></li>
+                    <li className='listpt'><Link to='/addprob' className='lenktab'>Add or edit a problem</Link></li>
                     <li className='listpt'>{`Hello, ${localStorage.getItem('name')}!`}</li>
+                    <li className='listpt'><Link to='/welcome' className='lenktab'>Home</Link></li>
                     <li className='listpt' onClick={logOut}>Logout</li>
                 </ul>
                 <div id='sb' className="search-bar">

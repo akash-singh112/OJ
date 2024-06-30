@@ -1,0 +1,49 @@
+.whole3{
+    background: bisque;
+    transition: 0.5s;
+  }
+
+.whity{
+    color:white;
+  }
+  
+  .blacky{
+    color:black;
+  }
+
+  .heamder{
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .displaytable{
+    background-color: skyblue;
+    align-items: center;
+  }
+
+  .tablecover{
+    margin-top: 20px;
+  }
+
+  table, th, td{
+    border-collapse: collapse;
+  }
+
+  .editing{
+    line-height: 4;
+  }
+
+  .botton{
+    cursor: pointer;
+    font-size: 25px;
+    text-decoration: none;
+  }
+
+  .blackborder{
+    border: 2px solid black;
+  }
+
+  .whiteborder{
+    border: 2px solid white;
+  }

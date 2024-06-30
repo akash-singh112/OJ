@@ -30,6 +30,11 @@
     cursor: pointer;
 }
 
+.lenktab{
+    color:inherit;
+    text-decoration: none;
+}
+
 #mode-switcher{
     width:50px;
     cursor: pointer;

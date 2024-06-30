@@ -6,10 +6,10 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const cors = require('cors');
+const AddProb = require('./routes/addprobb.js');
+const PS = require('./routes/PS.js');
+const DeleteProblem = require('./routes/del-prb.js');
 dotenv.config();
-const User1 = require('./problem-set/problemSchema.js')
-const {DBConnectionProblemSet} = require('./problem-set/problem_server.js');
-const mongoose = require('mongoose');
 
 //run on http://localhost:port/{ur_wish}
 const app = express();
@@ -26,7 +26,7 @@ app.get('/home',(req,res)=>{
 });
 
 DBConnection();
-DBConnectionProblemSet();
+//DBConnectionProblemSet();
 
 app.post('/register',async (req,res)=>{
     try {
@@ -118,36 +118,9 @@ app.post('/login',async (req,res)=>{
     }
 })
 
-app.post('/home/welcome/addprob',async (req,res)=>{
-    try {
-        const {tags,difficulty,problem_name,description,value_constraints,input_description,output_description,sampleTestCases,outputOfsampleTestCases,hiddenTestCases,outputOfhiddenTestCases} = req.body;
-        User1.createProblem({
-            tags:tags,
-            difficulty:difficulty,
-            problem_name:problem_name,
-            description:description,
-            value_constraints:value_constraints,
-            input_description:input_description,
-            output_description:output_description,
-            sampleTestCases:sampleTestCases,
-            outputOfsampleTestCases:outputOfsampleTestCases,
-            hiddenTestCases:hiddenTestCases,
-            outputOfhiddenTestCases:outputOfhiddenTestCases
-        });
-        console.log('yahan hu');
-
-        const added_prob = await User1.where('problem_name').equals('Counting Rooms').limit(1);
-
-        console.log('Added prob',added_prob);
-
-    res.status(200).json({message:'Problem addition successful!',
-        success:true,
-        data:added_prob
-    })
-    } catch (error) {
-        console.error(error.message);
-    }
-})
+app.use('/addprob',AddProb);
+app.use('/ps',PS);
+app.use('/delprob',DeleteProblem);
 
 app.get('/:universalURL',(req,res)=>{
     res.send("Status 404 : URL not found");

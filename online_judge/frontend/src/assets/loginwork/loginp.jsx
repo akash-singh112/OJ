@@ -40,7 +40,7 @@ export function Login() {
       box1.classList.add('hara');
       box1.classList.remove('lal');
       setTimeout(()=>{
-        navigate('/home/welcome');
+        navigate('/welcome');
       },500)
     }
     else{
@@ -81,7 +81,7 @@ export function Login() {
         <a href='#' className='forgot'>Forgot password?</a>
         <button type='submit' className='button1'>Login</button>
         <div className="register_link">
-          <p>Don't have an account?   <Link to='/home/register' className='link1'>Register</Link></p>
+          <p>Don't have an account?   <Link to='/register' className='link1'>Register</Link></p>
         </div>
         <div className="response">
           <p className='laal' id='rang'>{result}</p>

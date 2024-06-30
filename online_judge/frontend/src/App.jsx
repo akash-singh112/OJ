@@ -15,20 +15,43 @@ import { Problemset } from './assets/hs/problemset/problemset.jsx'
 function App() {
   return (
     <Routes>
-      <Route path='/home'>
+      <Route path='/'>
         <Route index element={<Home />} />
         <Route path='register' element={<Register />} />
         <Route path='login' element={<Login />} />
         <Route path='welcome' element={
           <PrivateRoute>
             <HomeScreen/>
+          </PrivateRoute>
+        } />
+        <Route path='addprob' element={
+          <PrivateRoute>
             <AddProb/>
+          </PrivateRoute>
+        } />
+        <Route path='rec-con' element={
+          <PrivateRoute>
             <RecentContests/>
+          </PrivateRoute>
+        } />
+        <Route path='profile' element={
+          <PrivateRoute>
             <Profile/>
+          </PrivateRoute>
+        } />
+        <Route path='prob-solv' element={
+          <PrivateRoute>
             <SolvedProb/>
+          </PrivateRoute>
+        } />
+        <Route path='ps' element={
+          <PrivateRoute>
             <Problemset/>
           </PrivateRoute>
         } />
+
+
+
       </Route>
       <Route path='*' element={<NotFound />}/>
     </Routes>

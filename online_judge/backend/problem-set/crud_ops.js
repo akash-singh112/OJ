@@ -1,31 +1,27 @@
-const User = require('./problemSchema.js');
-const {DBConnectionProblemSet} = require('./problem_server.js');
+const User1 = require('./problemSchema.js');
+const {DBConnection} = require('../database/db.js')
 
-DBConnectionProblemSet();
+DBConnection();
 
-// User.createProblem({
-//     tags:['math','combinatorics','number-theory'],
-//     difficulty:1400,
-//     problem_name:'Coin Combinations 69',
-//     description:'Let D(n) represent the sum of digits of n. For how many integers n where 10^l ≤ n < 10^r satisfy D(k⋅n)=k⋅D(n)? Output the answer modulo 10^9+7',
-//     constraints:{
-//         time_limit_per_test:'1s',
-//         space_limit_per_test:'64MB',
-//         value_constraints:['0 <= l <= 10^9','0 <= r <= 10^9',' 1 <= k <= 10^9',' l < r ']
-//     },
-//     input_description:'Each test case contains three integers l, r, and k.',
-//     output_description:'Print one integer: answer modulo 10^9+7.',
-//     sampleTestCases:['0 1 4','0 2 7','1 2 1','1 2 3','582 74663 3','0 3 1'],
-//     outputOfSampleTestCases:['2','3','90','12','974995667','999'],
-//     hiddenTestCases:['0 1 1 ','0 1 2','0 1 3','0 1 4','0 1 5','0 1 6','0 1 7','167959138 245485584 642802746','740396294 877385394 6','503722502 981764048 5','268792717 557973769 4','125908042 655293904 3','150414368 213261024 7','856168101 912335599 6'],
-//     outputOfHiddenTestCases:['9','4','3','2','1','1','1','0','13041959','899062854','462839189','870241350','808222805','3513308']
-// })
+User1.createProblem({
+    tags:['two-pointer','array','greedy'],
+    difficulty:500,
+    problem_name:'Valid Palindrome',
+    description:'Given a string s of length n, print 1 if it is a palindrome, or 0 otherwise. A palindrome is a word, phrase, or sequence that reads the same backwards as forwards, e.g. madam, tit, tat, malyalam etc.',
+    value_constraints:['1 < n <= 10^5'],
+    input_description:'The first line contains a single integer n - the length of string "s".The second line contains the string "s", consisting of only lowercase Latin letters.',
+    output_description:'Print a single integer - 1 if palindrome else 0.',
+    sampleTestCases:['5 madam','3 tit','6 abccbd','6 abccba','7 zzzzzzz'],
+    outputOfSampleTestCases:['1','1','0','1','1'],
+    hiddenTestCases:[' ','bastarddratsab'],
+    outputOfHiddenTestCases:['1','1']
+})
 
-// const run = async ()=>{
-//     const entry = await User.findbyName('Counting Rooms');
-//     console.log(entry);
-// }
+const run = async ()=>{
+    const entry = await User1.findbyName('Valid Palindrome');
+    console.log(entry);
+}
 
-// run();
+run();
 
 
