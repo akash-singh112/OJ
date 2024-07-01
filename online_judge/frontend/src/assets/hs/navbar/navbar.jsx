@@ -19,10 +19,6 @@ export function Navbar({state,setState}){
         };
     }
 
-    const handleLogoClick = ()=>{
-        navigate('/home/welcome');
-    }
-
     const logOut = ()=>{
         localStorage.clear();
         navigate('/login');
@@ -31,12 +27,12 @@ export function Navbar({state,setState}){
     return(
         <>
             <div id='navcol' className="container4">
-                <Link onClick={handleLogoClick}><img src={leenk}  id='logo' width={150}/></Link>
+                <Link to='/welcome'><img src={leenk}  id='logo' width={150}/></Link>
                 <ul id='lists'>
                     <li className='listpt'><Link to='/ps' className='lenktab'>Problemset</Link></li>
                     <li className='listpt'><Link to='/rec-con' className='lenktab'>Recent Contests</Link></li>
                     <li className='listpt'><Link to='/solv-prob' className='lenktab'>Solved Problems</Link></li>
-                    <li className='listpt'><Link to='/addprob' className='lenktab'>Add or edit a problem</Link></li>
+                    <li className='listpt'><Link to='/addprob' className='lenktab'>Add a problem</Link></li>
                     <li className='listpt'>{`Hello, ${localStorage.getItem('name')}!`}</li>
                     <li className='listpt'><Link to='/welcome' className='lenktab'>Home</Link></li>
                     <li className='listpt' onClick={logOut}>Logout</li>

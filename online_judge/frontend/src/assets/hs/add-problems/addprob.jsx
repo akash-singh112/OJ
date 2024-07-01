@@ -2,12 +2,13 @@ import { Navbar } from '../navbar/navbar'
 import { useState,useEffect } from 'react';
 import { sendDataFromFrontendToUser1 } from './api-link-ps';
 import './addprob.css'
+import { useNavigate } from 'react-router-dom';
 
 export function AddProb(){
     const curr_mode = localStorage.getItem('curr-theme');
     const [state,setState] = useState(curr_mode?curr_mode:'lightmode');
     const [kolor,setKolor] = useState('');
-    const [result,setResult] = useState('');
+    const navigate = useNavigate();
     const [details,setDetails] = useState({
         problem_status:0,
         tags:'',
@@ -45,7 +46,7 @@ export function AddProb(){
         const response = await sendDataFromFrontendToUser1(details);
         //console.log(response);
 
-        setResult(response.message);
+        navigate('/ps');
     }
 
     return(
@@ -100,7 +101,6 @@ export function AddProb(){
                 </div>
                 <button type="submit" className='buttonn'>Add problem</button>
             </form>
-            <p className={`success_message ${kolor}`}>{result}</p>
         </div>
         </>
     )

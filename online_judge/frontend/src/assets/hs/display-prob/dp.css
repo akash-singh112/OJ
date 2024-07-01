@@ -1,0 +1,83 @@
+#headerrr{
+    justify-content: center;
+    text-align: center;
+    background-color: skyblue;
+}
+
+.maindiv{
+    max-width: 100%;
+    background-color: beige;
+    padding: 5px;
+    transition: 250ms;
+}
+
+.container55{
+    font-size: 16px;
+    line-height: 2;
+    padding: 2px;
+}
+
+.compiler{
+    justify-content: center;
+    text-align: center;
+}
+
+textarea{
+    font-size: 16px;
+    line-height: 1.05;
+    max-width: 100%;
+    justify-content: center;
+    margin-left: 80px;
+    resize: none;
+    height: 40em;
+    width: 50em;
+    padding: 5px 0px 5px 10px;
+}
+
+.centered{
+    text-align: center;
+}
+
+.whity{
+    color:white;
+}
+  
+  .blacky{
+    color:black;
+}
+
+.darkmode{
+    background: #222;
+}
+
+.buttonss{
+    text-align: center;
+}
+
+.run1{
+  width: 5%;
+  height: 45px;
+  background: red;
+  border:none;
+  outline:none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  color:#333;
+  font-weight: 700px;
+  margin-right: 100px;
+}
+
+.sub1{
+    margin-left: 100px;
+  width:5%;
+  height: 45px;
+  background: green;
+  border:none;
+  outline:none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  color:#333;
+  font-weight: 700px;
+}

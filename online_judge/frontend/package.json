@@ -2,7 +2,7 @@
   "name": "routing",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,13 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
     "axios": "^1.7.2",
     "react": "^18.3.1",
+    "react-codemirror2": "^8.0.0",
     "react-dom": "^18.3.1",
     "react-icons": "^5.2.1",
-    "react-router-dom": "^6.24.0"
+    "react-router-dom": "^6.24.0",
+    "react-simple-code-editor": "^0.13.1",
+    "react-syntax-highlighter": "^15.5.0"
   },
   "devDependencies": {
+    "@types/prismjs": "^1.26.4",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

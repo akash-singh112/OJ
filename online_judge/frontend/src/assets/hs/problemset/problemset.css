@@ -1,6 +1,6 @@
 .whole3{
     background: bisque;
-    transition: 0.5s;
+    transition: 0.25s;
   }
 
 .whity{
@@ -46,4 +46,9 @@
 
   .whiteborder{
     border: 2px solid white;
+  }
+
+  .nodecor{
+    text-decoration: none;
+    color:inherit;
   }

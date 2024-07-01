@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/',async(req,res)=>{
     try {
-        const allOfThem = await User1.find({},{problem_name:1,_id:0,problem_status:1,tags:1,difficulty:1});
+        const allOfThem = await User1.find({},{problem_name:1,problem_status:1,tags:1,difficulty:1});
         res.status(200).json({message:'Fetch success',
         success:true,
         data:allOfThem

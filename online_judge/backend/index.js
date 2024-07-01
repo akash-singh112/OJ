@@ -9,6 +9,9 @@ const cors = require('cors');
 const AddProb = require('./routes/addprobb.js');
 const PS = require('./routes/PS.js');
 const DeleteProblem = require('./routes/del-prb.js');
+const GetProb = require('../frontend/crud_ops/update/get_problem.js');
+const updateProblem = require('./routes/update-problem.js');
+const getting = require('./routes/getforshow.js')
 dotenv.config();
 
 //run on http://localhost:port/{ur_wish}
@@ -121,6 +124,9 @@ app.post('/login',async (req,res)=>{
 app.use('/addprob',AddProb);
 app.use('/ps',PS);
 app.use('/delprob',DeleteProblem);
+app.use('/getprob',GetProb);
+app.use('/updaterecord',updateProblem);
+app.use('/getforshow',getting);
 
 app.get('/:universalURL',(req,res)=>{
     res.send("Status 404 : URL not found");
