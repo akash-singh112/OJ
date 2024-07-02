@@ -3,7 +3,8 @@ import './dp.css'
 import { useEffect, useState } from 'react';
 import { fetchbyID } from './apilink-dp';
 import { Navbar } from '../navbar/navbar';
-import { CodeEditor } from './codeEditor';
+import { CodeEditor } from './codeEditor/codeEditor.jsx';
+import { ChakraProvider } from '@chakra-ui/react';
 
 export const DisplayProb = ()=>{
 
@@ -12,9 +13,6 @@ export const DisplayProb = ()=>{
     const curr_mode = localStorage.getItem('curr-theme');
     const [state,setState] = useState(curr_mode?curr_mode:'lightmode');
     const [kolor,setKolor] = useState('');
-    const [code,setCode] = useState('');
-    const [ip,setIp] = useState('');
-    const [op,setOp] = useState();
 
     useEffect(()=>{
         localStorage.setItem('curr-theme',state);
@@ -26,8 +24,6 @@ export const DisplayProb = ()=>{
         .then(res => {
             setDetails1(res.data.data[0]);
             console.log('logging data');
-            console.log(res.data.data[0].sampleTestCases);
-            console.log(res.data.data[0]);
         })
         .catch(e => e.message);
     },[])
@@ -69,11 +65,9 @@ export const DisplayProb = ()=>{
                         })
                     }</ul>
                 </div>
-                <CodeEditor />
-                <div className="buttonss">
-                    <button className="run1">Run</button>
-                    <button className="sub1">Submit</button>
-                </div>
+                <ChakraProvider>
+                    <CodeEditor state={state} setState={setState} details1={details1}/>
+                </ChakraProvider>
             </div>
         </div>
         </>

@@ -11,7 +11,8 @@ const PS = require('./routes/PS.js');
 const DeleteProblem = require('./routes/del-prb.js');
 const GetProb = require('../frontend/crud_ops/update/get_problem.js');
 const updateProblem = require('./routes/update-problem.js');
-const getting = require('./routes/getforshow.js')
+const getting = require('./routes/getforshow.js');
+const runCode = require('./routes/run.js')
 dotenv.config();
 
 //run on http://localhost:port/{ur_wish}
@@ -21,7 +22,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.get('/home',(req,res)=>{
     res.send('Welcome to Home Page\n')
@@ -29,7 +30,6 @@ app.get('/home',(req,res)=>{
 });
 
 DBConnection();
-//DBConnectionProblemSet();
 
 app.post('/register',async (req,res)=>{
     try {
@@ -127,6 +127,7 @@ app.use('/delprob',DeleteProblem);
 app.use('/getprob',GetProb);
 app.use('/updaterecord',updateProblem);
 app.use('/getforshow',getting);
+app.use('/runcode',runCode);
 
 app.get('/:universalURL',(req,res)=>{
     res.send("Status 404 : URL not found");

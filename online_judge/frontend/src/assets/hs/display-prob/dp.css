@@ -66,18 +66,19 @@ textarea{
   color:#333;
   font-weight: 700px;
   margin-right: 100px;
+  margin-top: 30px;
 }
 
 .sub1{
     margin-left: 100px;
-  width:5%;
-  height: 45px;
-  background: green;
-  border:none;
-  outline:none;
-  border-radius: 40px;
-  cursor: pointer;
-  font-size: 16px;
-  color:#333;
-  font-weight: 700px;
+    width:5%;
+    height: 45px;
+    background: green;
+    border:none;
+    outline:none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    color:#333;
+    font-weight: 700px;
 }
