@@ -18,13 +18,16 @@ const generateExtension = (lang)=>{
 const executeCpp = async (filePath,inputFile)=>{
     //extract uuid from filePath
     const uniqueid = path.basename(filePath,`.cpp`);
-    console.log(uniqueid);
+    //console.log(uniqueid);
+
     //append .exe to make as executable file
     const executableName = `${uniqueid}.exe`;
-    console.log(executableName);
-    //create path of executable file 
+    //console.log(executableName);
+
+    //create path of executable file
     const executablePath = path.join(outputPath,executableName);
-    console.log(executablePath);
+    //console.log(executablePath);
+    
     //run shell command with command
     const command = `g++ ${filePath} -o ${executablePath} && cd ${outputPath} && .\\${executableName}`;
     return new Promise((resolve,reject)=>{

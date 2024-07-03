@@ -4,8 +4,9 @@ import { useEffect, useRef,useState } from 'react';
 import './dd.css'
 import {samplecpp,samplejava,samplepy} from '../samples.js'
 import { runCode } from './run-code-api.js';
+import { changeProblemStatus } from './changeStatus.js';
 
-export const CodeEditor = ({state,setState,details1}) => {
+export const CodeEditor = ({state,setState,details1,setDetails1}) => {
     const [code,setCode] = useState('');
     const [lang,setLang] = useState('Language');
     const [input,setInput] = useState('');
@@ -14,6 +15,10 @@ export const CodeEditor = ({state,setState,details1}) => {
     const [loading,setLoading] = useState(false);
     const toast = useToast();
     const [err,setErr] = useState(false);
+    const [errmsg,setErrmsg] = useState('');
+    const [option,setOption] = useState('Run window');
+    const [arr,setArr] = useState([]);
+    const [loading1,setLoading1] = useState(false);
     const ref = useRef();
 
     useEffect(()=>{
@@ -46,9 +51,21 @@ export const CodeEditor = ({state,setState,details1}) => {
 
     const handleRun = async ()=>{
         try {
+            setOption('Run Window');
             setLoading(true);
             const res = await runCode(code,lang,input);
-            setOutput(res.data.output.split('\r\n'));
+            console.log(res);
+            (res.message === 'Running success' ? setErr(false) : setErr(true));
+            if(res.message === 'Running success'){
+                setOutput(res.output.split('\r\n'))
+            }
+            else{
+                if(lang==='cpp')
+                setErrmsg('Error: '+JSON.stringify(res.response.data.message).split('error: ').pop())
+                else if(lang==='java')
+                setErrmsg('Error: '+JSON.stringify(res.response.data.message).split('java:3: error: ').pop())
+                else setErrmsg('NameError: '+JSON.stringify(res.response.data.message).split('NameError: ').pop());
+            }
         } catch (error) {
             //display error to user
             toast({
@@ -63,44 +80,87 @@ export const CodeEditor = ({state,setState,details1}) => {
             setLoading(false);
         }
     }
-    //let arr = [...Array(details1.hiddenTestCases.length)].fill(0);
+
     const handleSubmit = async()=>{
-        console.log(details1);
+        setOption('Submission window')
+        setLoading1(true);
         const testcases = details1.hiddenTestCases;
-        //console.log(testcases);
         const output = details1.outputOfHiddenTestCases;
-        //console.log(output);
-        //console.log(typeof testcases);
-        testcases.map(async(ele,id)=>{
-            const result = await runCode(code,lang,ele);
-            // console.log(output[id]);
-            // console.log(typeof result.data.output);
-            // console.log(typeof output[id]);
-            if(result && (result.data.output == output[id]))console.log(1);
-            else console.log(0);
-        })
+        const n=testcases.length;
+        const arr1 = [...Array(details1.hiddenTestCases.length)].fill(0);
+        for(let i=0;i<n;i++){
+            const res = await runCode(code,lang,testcases[i]);
+            console.log(testcases[i]);
+            console.log(res);
+            console.log(res.output);
+            if(res.output == output[i])arr1[i]=1;
+            else break;
+        }
+        if(countOccurrences(arr1,0)==0){
+            changeProblemStatus(details1._id,2)
+            .then(res => {
+                toast({
+                    title:"Problem solved",
+                    description: res.data.message,
+                    status:"success",
+                    duration:5000,
+                    isClosable:true,
+                });
+            })
+            .catch(e => console.error(e.message));
+        }
+        setArr(arr1);
+        setLoading1(false);
+    }
+
+    const handleSwitchState = ()=>{
+        option=='Run Window' ? setOption('Submission window') : setOption('Run Window');
     }
 
     const handleInputChange = (e)=>{
         setInput(e.target.value);
-        //console.log(e.target.value);
     }
+
+    const generateOutputString = ()=>{
+        var s = '';
+        (option === 'Run Window' ? (
+            !err ? (output && output.map((element,id)=>{
+                s += element + '\n';
+            })) : (s = errmsg)
+        ) : (arr.map((element,id)=>{
+            //console.log('logging arr element');
+            //console.log(element);
+            if(element===1){
+                s += `Testcase ${id+1} passed\n`;
+            }
+            else{
+                s += `Testcase ${id+1} failed\n`;
+            }
+        })))
+        return s;
+    }
+
+    const countOccurrences = (arr, val) =>
+        arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
     return(
         <>
-            <div className="dropdown">
-                <button className="dropbtn">{lang}</button>
-                <div className="dropdown-content" >
-                    <a onClick={setCpp}>cpp</a>
-                    <a onClick={setJava}>java</a>
-                    <a onClick={setPy}>python</a>
-                </div>
-            </div>
+            <HStack>
+                
+            </HStack>
             <HStack spacing={4}>
-                <Box margin="30px" padding-top="2px" w={"50%"}>
+                <Box margin="40px" w={"45%"} mt={'0px'}>
+                    <div className="dropdown">
+                    <button className="dropbtn">{lang}</button>
+                    <div className="dropdown-content" >
+                        <a onClick={setCpp}>cpp</a>
+                        <a onClick={setJava}>java</a>
+                        <a onClick={setPy}>python</a>
+                    </div>
+                    </div>
                     <Editor
                     height={"70vh"}
-                    language={lang} 
+                    language={lang}
                     defaultValue="// write your code here"
                     theme='vs-dark'
                     value={code}
@@ -109,30 +169,28 @@ export const CodeEditor = ({state,setState,details1}) => {
                     options={{
                     fontSize:16,
                     lineHeight:1.3,
+
                     }} />
                 </Box>
-                <Box w="50%">
-                    <Text marginBottom={"2"} fontSize={"lg"} className={`${kolor}`} textAlign={"center"}>Output</Text>
-                    <Box
+                <Box margin="40px" w="45%" mr={"150px"}>
+                    <Button bg={option=="Run Window" ? 'green.500' : "red.500"} marginBottom={"2"} fontSize={"lg"} textAlign={"center"} onClick={handleSwitchState} ml={"80px"}>{option}</Button>
+                    <Textarea
+                    position={"relative"}
                     height={"70vh"}
-                    padding={"2px"}
-                    border={"1px solid"}
                     borderRadius={"4px"}
-                    borderColor={"#333"}
-                    marginRight={"5px"}
-                    mb={"20px"}
+                    borderColor={option === 'Run Window' ? (err ? 'red.500' : "#333") : (arr && countOccurrences(arr,0) ? 'red' : 'green')}
+                    marginRight={"20px"}
+                    mb={"38px"}
+                    value={generateOutputString()}
                     backgroundColor={"black"}
-                    color={"white"}>
-                    {
-                        output && output.map((element,idx)=>{
-                            return(<Text key={idx}>{element}</Text>)
-                        })
-                    } 
-                    </Box>
+                    color={option === 'Run Window' ? (err ? 'red.500' : "white") : (arr && countOccurrences(arr,0) ? 'red' : 'green')}
+                    readOnly={true}
+                    resize={"none"}>
+                    </Textarea>
                 </Box>
             </HStack>
-            <Box h={"50wh"} textAlign={"center"} w={"100%"}>
-                <Text textAlign={"center"} padding-bottom={"10px"} className={`${kolor}`}>Input</Text>
+            <Box h={"50wh"} textAlign={"center"} w={"100%"} margin={"1px"}>
+                <Text textAlign={"center"} padding-bottom={"10px"} className={`${kolor}`} mb={"1px"}>Input</Text>
                 <Textarea
                 mr={"40px"}
                 className='ph'
@@ -149,8 +207,8 @@ export const CodeEditor = ({state,setState,details1}) => {
                 </Textarea>
             </Box>
             <div className="buttonss">
-                <Button className="bu" onClick={handleRun} isLoading={loading} bg={"red"} mr={"150px"} mt={"40px"}>Run</Button>
-                <Button className="bu" bg={"green"} ml={"150px"} mt={"40px"} onClick={handleSubmit}>Submit</Button>
+                <Button className="bu" bg={"green"} mr={"150px"} mt={"40px"} onClick={handleRun} isLoading={loading}>Run</Button>
+                <Button className="bu" bg={"red"} ml={"150px"} mt={"40px"} onClick={handleSubmit} isLoading={loading1}>Submit</Button>
             </div>
         </>
     )

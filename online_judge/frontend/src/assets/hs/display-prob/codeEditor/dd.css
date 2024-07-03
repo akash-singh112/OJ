@@ -1,11 +1,12 @@
 .dropbtn {
     background-color: #04AA6D;
     color: white;
-    padding: 16px;
     font-size: 16px;
     border: none;
-    border-radius: 20px;
-    margin: 15px;
+    border-radius: 8px;
+    margin: 5px;
+    height: 40px;
+    width: 75px;
   }
   
   .dropdown {
@@ -20,6 +21,7 @@
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    cursor: pointer;
   }
   
   .dropdown-content a {

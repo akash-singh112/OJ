@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { fetchbyID } from './apilink-dp';
 import { Navbar } from '../navbar/navbar';
 import { CodeEditor } from './codeEditor/codeEditor.jsx';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider,Text } from '@chakra-ui/react';
 
 export const DisplayProb = ()=>{
 
@@ -36,7 +36,7 @@ export const DisplayProb = ()=>{
             <div className={`maindiv ${state}`}>
                 <div className="container55">
                     <p className={`centered ${kolor}`}>Difficulty/Rating:  {details1.difficulty}</p>
-                    <p className={`centered ${kolor}`}>Problem Status:{details1.problem_status}</p>
+                    <Text className='centered' color={details1.problem_status === 2 ? "green" : (details1.problem_status === 1 ? "yellow" : "red")}>{details1.problem_status === 2 ? "Solved" : (details1.problem_status === 1 ? "Unsolved and marked for review" : "Unsolved and not marked for review")}</Text>
                     <p className={`${kolor}`}><b>Description</b><br/>{details1.description}</p>
                     <p className={`${kolor}`}><b>Constraints</b></p>
                     <ul className={`${kolor}`}>{
@@ -66,7 +66,7 @@ export const DisplayProb = ()=>{
                     }</ul>
                 </div>
                 <ChakraProvider>
-                    <CodeEditor state={state} setState={setState} details1={details1}/>
+                    <CodeEditor state={state} setState={setState} details1={details1} setDetails1={setDetails1}/>
                 </ChakraProvider>
             </div>
         </div>
