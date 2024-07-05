@@ -2,9 +2,10 @@ import {Box, Button, HStack, Text, Textarea, useToast} from '@chakra-ui/react'
 import Editor from '@monaco-editor/react'
 import { useEffect, useRef,useState } from 'react';
 import './dd.css'
-import {samplecpp,samplejava,samplepy} from '../samples.js'
+import {samplecpp,samplejava,samplepy,sampleJS} from '../samples.js'
 import { runCode } from './run-code-api.js';
 import { changeProblemStatus } from './changeStatus.js';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 export const CodeEditor = ({state,setState,details1,setDetails1}) => {
     const [code,setCode] = useState('');
@@ -48,6 +49,11 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
         setLang('python')
         setCode(samplepy);
     };
+
+    const setJS = ()=>{
+        setLang('javascript')
+        setCode(sampleJS);
+    }
 
     const handleRun = async ()=>{
         try {
@@ -100,8 +106,7 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
             changeProblemStatus(details1._id,2)
             .then(res => {
                 toast({
-                    title:"Problem solved",
-                    description: res.data.message,
+                    title:"Problem solved!",
                     status:"success",
                     duration:5000,
                     isClosable:true,
@@ -145,9 +150,6 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
 
     return(
         <>
-            <HStack>
-                
-            </HStack>
             <HStack spacing={4}>
                 <Box margin="40px" w={"45%"} mt={'0px'}>
                     <div className="dropdown">
@@ -156,6 +158,7 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
                         <a onClick={setCpp}>cpp</a>
                         <a onClick={setJava}>java</a>
                         <a onClick={setPy}>python</a>
+                        <a onClick={setJS}>Javascript</a>
                     </div>
                     </div>
                     <Editor

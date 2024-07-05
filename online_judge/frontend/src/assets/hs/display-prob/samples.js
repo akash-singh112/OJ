@@ -29,3 +29,6 @@ export const successCode = `    //algorithm of success
     Improve();
 
     }`
+
+export const sampleJS = `console.log("Hello World")
+//note: Javascript is currently in development stage on our compiler, please do not submit any code in this language`

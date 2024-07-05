@@ -21,7 +21,7 @@ const generateExtension = (lang)=>{
 const generateFilePath = (lang,code)=>{
     //generate uuid for this code
     const uniqueId = uuid();
-    console.log(uniqueId);
+    //console.log(uniqueId);
     //
     const extension = generateExtension(lang);//generate extension based on language
     const fileName = `${uniqueId}.${extension}`;//generate file_name.extension

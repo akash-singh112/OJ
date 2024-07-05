@@ -12,6 +12,17 @@
     transition: 250ms;
 }
 
+.copy-button{
+    cursor: pointer;
+    display: inline;
+    width: 40px;
+}
+
+.list-item{
+    display: inline;
+    width: 200px;
+}
+
 .container55{
     font-size: 16px;
     line-height: 2;

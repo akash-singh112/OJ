@@ -12,7 +12,6 @@ const DeleteProblem = require('./routes/del-prb.js');
 const GetProb = require('../frontend/crud_ops/update/get_problem.js');
 const updateProblem = require('./routes/update-problem.js');
 const getting = require('./routes/getforshow.js');
-const runCode = require('./routes/run.js');
 const statusChangeCode = require('./routes/changeStatus.js')
 dotenv.config();
 
@@ -128,7 +127,6 @@ app.use('/delprob',DeleteProblem);
 app.use('/getprob',GetProb);
 app.use('/updaterecord',updateProblem);
 app.use('/getforshow',getting);
-app.use('/runcode',runCode);
 app.use('/changestatus',statusChangeCode);
 
 app.get('/:universalURL',(req,res)=>{

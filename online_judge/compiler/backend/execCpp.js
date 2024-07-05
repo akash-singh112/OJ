@@ -20,8 +20,8 @@ const executeCpp = async (filePath,inputFile)=>{
     const uniqueid = path.basename(filePath,`.cpp`);
     //console.log(uniqueid);
 
-    //append .exe to make as executable file
-    const executableName = `${uniqueid}.exe`;
+    //append .exe to make as executable file(for dockerisation .out as .out is a linux-cpp extension)
+    const executableName = `${uniqueid}.out`;
     //console.log(executableName);
 
     //create path of executable file
@@ -29,7 +29,7 @@ const executeCpp = async (filePath,inputFile)=>{
     //console.log(executablePath);
     
     //run shell command with command
-    const command = `g++ ${filePath} -o ${executablePath} && cd ${outputPath} && .\\${executableName}`;
+    const command = `g++ ${filePath} -o ${executablePath} && cd ${outputPath} && ./${executableName}`;
     return new Promise((resolve,reject)=>{
         const process = exec(command,(err,stdout,stderr)=>{
             if(err){

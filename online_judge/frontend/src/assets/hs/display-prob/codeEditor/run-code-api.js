@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-const api_url = 'http://localhost:8800';
+const api_url = 'http://localhost:6005';
 
-export const runCode = async (code,lang,input,flag) =>{
+export const runCode = async (code,lang,input) =>{
     try {
         const payload  = {code:code,lang:lang,input:input};
         const response = await axios.post(`${api_url}/runcode`,payload);

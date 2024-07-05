@@ -4,10 +4,13 @@ import { useEffect, useState } from 'react';
 import { fetchbyID } from './apilink-dp';
 import { Navbar } from '../navbar/navbar';
 import { CodeEditor } from './codeEditor/codeEditor.jsx';
-import { ChakraProvider,Text } from '@chakra-ui/react';
+import { ChakraProvider,Text, useToast } from '@chakra-ui/react';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import { IoCopy } from "react-icons/io5";
 
 export const DisplayProb = ()=>{
 
+    const toast = useToast();
     const {id} = useParams();
     const [details1,setDetails1] = useState({});
     const curr_mode = localStorage.getItem('curr-theme');
@@ -27,6 +30,15 @@ export const DisplayProb = ()=>{
         })
         .catch(e => e.message);
     },[])
+
+    const handleCopyToClipboard = ()=>{
+        toast({
+            title:"Testcase copied",
+            status:"success",
+            duration:3000,
+            isClosable:true,
+        });
+    }
 
     return(
         <>
@@ -52,7 +64,16 @@ export const DisplayProb = ()=>{
                     <ul className={`${kolor}`}>{
                         details1.sampleTestCases && details1.sampleTestCases.map((element,idx)=>{
                             return(
-                                <li key={idx}>{`${element}`}</li>
+                                <>
+                                    <li key={idx}>
+                                        <span className={`list-item`}>{`${element}`}</span>
+                                        <span className={`list-item`}>
+                                        <CopyToClipboard text={element}>
+                                            <IoCopy className={`copy-button ${kolor}`} onClick={handleCopyToClipboard}/>
+                                        </CopyToClipboard>
+                                        </span>
+                                    </li>
+                                </>
                             )
                         })
                     }</ul>

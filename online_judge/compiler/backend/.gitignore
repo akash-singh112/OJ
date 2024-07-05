@@ -1,0 +1,5 @@
+.env
+node_modules
+codeStore
+cppexe
+package-lock.json

@@ -1,17 +1,34 @@
 const express = require("express");
-const {generateFilePath} = require('../../compiler/backend/genpath.js');
-const {executeCpp} = require('../../compiler/backend/execCpp.js')
-const {executeJava} = require('../../compiler/backend/execJava.js')
-const {executePy} = require('../../compiler/backend/execPy.js')
-const router = express.Router();
+const {generateFilePath} = require('./genpath.js');
+const {executeCpp} = require('./execCpp.js')
+const {executeJava} = require('./execJava.js')
+const {executePy} = require('./execPy.js');
+const { executeJS } = require("./execJS.js");
+const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config();
+
+//compiler server on port {6005}
+const port = 6005;
+const app = express();
+
+//add middlewares
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
 const generateExtension = (lang)=>{
     if(lang==='cpp'||lang==='cplusplus'||lang=='C++'||lang==='c++')return 'cpp';
     if(lang==='Java'||lang==='java')return 'java';
     if(lang==='python'||lang==='py')return 'py';
+    if(lang==='javascript'||lang==='js')return 'js';
 }
 
-router.post('/',async (req,res)=>{
+app.get('/',(req,res)=>{
+    res.status(201).json({online_judge:"compiler"});
+})
+
+app.post('/runcode',async (req,res)=>{
     const {code,lang,input} = req.body;
     //if user chose no language
     if(lang === undefined){
@@ -32,6 +49,7 @@ router.post('/',async (req,res)=>{
             case 'cpp': output = await executeCpp(filePath,input);break;
             case 'java': output = await executeJava(filePath,input);break;
             case 'py' : output = await executePy(filePath,input);break;
+            case 'js' : output = await executeJS(filePath,input);break;
         }
         console.log(output);
         res.status(201).send({
@@ -46,4 +64,6 @@ router.post('/',async (req,res)=>{
     }
 })
 
-module.exports = router;
+app.listen(port,()=>{
+    console.log(`Server is listening to port ${port}`);
+})
