@@ -1,16 +1,17 @@
-import { useState , useEffect } from 'react'
+import { useState } from 'react'
 import { MdEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
 import { FaLockOpen } from "react-icons/fa";
-import { FaUser } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import {sendDataFromFrontendToBackend} from './api_register.js'
 import './App2.css'
 import { Link, useNavigate } from 'react-router-dom';
+import { Button } from '@chakra-ui/react';
 
 //localhost 8800 for register backend
 export function Register() {
+  const [loading,setLoading] = useState(false);
   const navigate = useNavigate();
   const [details,setDetails] = useState({
     firstname:'',
@@ -35,12 +36,14 @@ export function Register() {
     //prevents default behaviour of refereshing the page on submitting form//
     e.preventDefault();
 
+    setLoading(true);
     console.log(details);
     
     const response = await sendDataFromFrontendToBackend(details);
     console.log(response);
 
     setTimeout(()=>{
+      setLoading(false)
       navigate('/login')
     },2000)
   }
@@ -91,7 +94,7 @@ export function Register() {
             <span onClick={handleToggle} className='icons1' id='pp'>{icon}</span>
           </div>
         </div>
-        <button className="button1">Register</button>
+        <Button className="button1" isLoading={loading} type="submit" loadingText="Registering">Register</Button>
         <p id='proclog'>If you have completed registration,proceed to <Link to='/login' id='t6'>Login</Link></p>
       </form>
     </div>

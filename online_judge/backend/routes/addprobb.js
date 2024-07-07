@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post('/',async (req,res)=>{
     try {
-        var {tags,difficulty,problem_name,description,value_constraints,input_description,output_description,sampleTestCases,outputOfSampleTestCases,hiddenTestCases,outputOfHiddenTestCases} = req.body;
+        let {tags,difficulty,problem_name,description,value_constraints,input_description,output_description,sampleTestCases,outputOfSampleTestCases,hiddenTestCases,outputOfHiddenTestCases} = req.body;
         
         //console.log('yahan1111111');
         sampleTestCases = sampleTestCases.split(',')

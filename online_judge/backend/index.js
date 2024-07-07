@@ -12,7 +12,9 @@ const DeleteProblem = require('./routes/del-prb.js');
 const GetProb = require('../frontend/crud_ops/update/get_problem.js');
 const updateProblem = require('./routes/update-problem.js');
 const getting = require('./routes/getforshow.js');
-const statusChangeCode = require('./routes/changeStatus.js')
+const statusChangeCode = require('./routes/changeStatus.js');
+const getbyName = require('./routes/getviaName.js');
+const updateUser = require('./routes/updateUser.js')
 dotenv.config();
 
 //run on http://localhost:port/{ur_wish}
@@ -113,6 +115,7 @@ app.post('/login',async (req,res)=>{
             message:'Login successful!',
             success:true,
             name:name11,
+            userData:user
         });
 
     } catch (error) {
@@ -128,6 +131,8 @@ app.use('/getprob',GetProb);
 app.use('/updaterecord',updateProblem);
 app.use('/getforshow',getting);
 app.use('/changestatus',statusChangeCode);
+app.use('/fetchbyname',getbyName);
+app.use('/updateuserinfo',updateUser)
 
 app.get('/:universalURL',(req,res)=>{
     res.send("Status 404 : URL not found");

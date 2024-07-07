@@ -48,7 +48,7 @@ export const DisplayProb = ()=>{
             <div className={`maindiv ${state}`}>
                 <div className="container55">
                     <p className={`centered ${kolor}`}>Difficulty/Rating:  {details1.difficulty}</p>
-                    <Text className='centered' color={details1.problem_status === 2 ? "green" : (details1.problem_status === 1 ? "yellow" : "red")}>{details1.problem_status === 2 ? "Solved" : (details1.problem_status === 1 ? "Unsolved and marked for review" : "Unsolved and not marked for review")}</Text>
+                    <Text className='centered' color={JSON.parse(localStorage.getItem('userData')).problems_solved.includes(details1._id) ? "green" : "red"}>{JSON.parse(localStorage.getItem('userData')).problems_solved.includes(details1._id) ? "Solved" : "Unsolved"}</Text>
                     <p className={`${kolor}`}><b>Description</b><br/>{details1.description}</p>
                     <p className={`${kolor}`}><b>Constraints</b></p>
                     <ul className={`${kolor}`}>{
@@ -64,16 +64,12 @@ export const DisplayProb = ()=>{
                     <ul className={`${kolor}`}>{
                         details1.sampleTestCases && details1.sampleTestCases.map((element,idx)=>{
                             return(
-                                <>
-                                    <li key={idx}>
-                                        <span className={`list-item`}>{`${element}`}</span>
-                                        <span className={`list-item`}>
-                                        <CopyToClipboard text={element}>
-                                            <IoCopy className={`copy-button ${kolor}`} onClick={handleCopyToClipboard}/>
-                                        </CopyToClipboard>
-                                        </span>
-                                    </li>
-                                </>
+                                <li key={element}>
+                                    <span>{`${element}`}</span>
+                                    <CopyToClipboard text={element}>
+                                        <IoCopy className={`copy-button ${kolor}`} onClick={handleCopyToClipboard}/>
+                                    </CopyToClipboard>
+                                </li>
                             )
                         })
                     }</ul>

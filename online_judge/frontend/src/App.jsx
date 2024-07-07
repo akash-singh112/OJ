@@ -8,11 +8,12 @@ import { HomeScreen } from './assets/hs/main-home-page/home_s.jsx'
 import { PrivateRoute } from './private.jsx'
 import { AddProb } from './assets/hs/add-problems/addprob.jsx'
 import { RecentContests } from './assets/hs/recent-contests/recent-contests.jsx'
-import { SolvedProb } from './assets/hs/solved-problems/solved-probs.jsx'
 import { Profile } from './assets/hs/profile/profile.jsx'
 import { Problemset } from './assets/hs/problemset/problemset.jsx'
 import { UpdateRecord } from '../crud_ops/update/updateprob.jsx'
 import { DisplayProb } from './assets/hs/display-prob/dp.jsx'
+import { ChangePassword } from './assets/changepass/changepass.jsx'
+import { EditUser } from './assets/edituser/edituser.jsx'
 
 function App() {
   return (
@@ -41,11 +42,6 @@ function App() {
             <Profile/>
           </PrivateRoute>
         } />
-        <Route path='prob-solv' element={
-          <PrivateRoute>
-            <SolvedProb/>
-          </PrivateRoute>
-        } />
         <Route path='ps' element={
           <PrivateRoute>
             <Problemset/>
@@ -59,6 +55,16 @@ function App() {
         <Route path='displayprob/:id' element={
           <PrivateRoute>
             <DisplayProb/>
+          </PrivateRoute>
+        } />
+        <Route path='edituser' element={
+          <PrivateRoute>
+            <EditUser/>
+          </PrivateRoute>
+        } />
+        <Route path='changepass' element={
+          <PrivateRoute>
+            <ChangePassword/>
           </PrivateRoute>
         } />
 

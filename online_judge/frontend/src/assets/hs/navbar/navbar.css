@@ -35,6 +35,11 @@
     text-decoration: none;
 }
 
+.sm11{
+    position: relative;
+    right: 50px;
+}
+
 #mode-switcher{
     width:50px;
     cursor: pointer;
@@ -47,6 +52,7 @@
     background: #242424;
     padding: 10px 20px;
     border-radius: 50px;
+    margin-right: 80px;
 }
 
 .white1{
@@ -54,7 +60,7 @@
 }
 
 .search-box{
-    padding: 6px;
+    padding: 1px;
     background: transparent;
     border: 0;
     outline: 0;
@@ -69,10 +75,6 @@
 
 #mag-glass{
     width:20px;
-}
-
-#daytime{
-    cursor: pointer;
 }
 
 .darkmode .container4{

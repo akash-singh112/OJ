@@ -1,14 +1,6 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-    problem_status:{
-        //0=unsolved and not marked for solve later
-        //1=unsolved and marked for solve later
-        //2=solved
-        type:Number,
-        required:true,
-        default:0
-    },
     tags:{
         type:[String],
     },

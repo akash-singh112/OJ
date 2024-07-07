@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 import { Navbar } from "../navbar/navbar";
-import '../problemset/problemset.css'
+import './problemset.css'
 import {fetchDataFromDatabase} from './apilinkps.js'
 import { MdDelete,MdOutlineUpdate } from "react-icons/md";
 import { deleteDataFromDatabase } from './delprob_api.js';
@@ -24,7 +24,7 @@ export const Problemset = ()=>{
         fetchDataFromDatabase()
         .then(res => setDetails(res))
         .catch(e => console.error(e.message));
-    },[])
+    },[]);
     console.log('lol',details);
 
     const handleDelete = async (name)=>{
@@ -64,7 +64,7 @@ export const Problemset = ()=>{
                                 <tr key={i} align="center" className={`${kolor} editing`}>
                                     <td className={`${bc}`}>{i+1}</td>
                                     <td className={`${bc}`}><Link to={`/displayprob/${entry._id}`} className="nodecor">{entry.problem_name}</Link></td>
-                                    <td className={`${bc}`}>{entry.problem_status}</td>
+                                    <td className={`${bc}`}>{JSON.parse(localStorage.getItem('userData')).problems_solved.includes(entry._id) ? 1 : 0}</td>
                                     <td className={`${bc}`}>{entry.difficulty}</td>
                                     <td className={`${bc}`}>{entry.tags.join(',')}</td>
                                     <td className={`${bc}`}><MdOutlineUpdate className='botton' onClick={()=>sendName(entry.problem_name)}/></td>

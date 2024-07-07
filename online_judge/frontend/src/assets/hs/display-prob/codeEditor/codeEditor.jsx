@@ -5,7 +5,6 @@ import './dd.css'
 import {samplecpp,samplejava,samplepy,sampleJS} from '../samples.js'
 import { runCode } from './run-code-api.js';
 import { changeProblemStatus } from './changeStatus.js';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 export const CodeEditor = ({state,setState,details1,setDetails1}) => {
     const [code,setCode] = useState('');
@@ -21,6 +20,7 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
     const [arr,setArr] = useState([]);
     const [loading1,setLoading1] = useState(false);
     const ref = useRef();
+    const [tle,setTle] = useState(false);
 
     useEffect(()=>{
         setKolor(state=='darkmode' ? 'whity' : 'blacky');
@@ -59,7 +59,15 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
         try {
             setOption('Run Window');
             setLoading(true);
+            //start timer
+            const timeout = setTimeout(TLEVerdict,10000);
+
             const res = await runCode(code,lang,input);
+
+            //if u have reached here no tle
+            clearTimeout(timeout);
+            if(tle)return;
+
             console.log(res);
             (res.message === 'Running success' ? setErr(false) : setErr(true));
             if(res.message === 'Running success'){
@@ -87,13 +95,30 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
         }
     }
 
+    const TLEVerdict = ()=>{
+        toast({
+            title:"Time limit exceeded!",
+            description: "Please optimize your code and try again",
+            status:"error",
+            duration:3000,
+            isClosable:true,
+        });
+        setTle(true);
+        setLoading1(false);
+        setLoading(false);
+    }
+
     const handleSubmit = async()=>{
-        setOption('Submission window')
+        setOption('Submission window');
         setLoading1(true);
         const testcases = details1.hiddenTestCases;
         const output = details1.outputOfHiddenTestCases;
         const n=testcases.length;
         const arr1 = [...Array(details1.hiddenTestCases.length)].fill(0);
+
+        //start the timer for execution
+        const timeout = setTimeout(TLEVerdict,15000);
+
         for(let i=0;i<n;i++){
             const res = await runCode(code,lang,testcases[i]);
             console.log(testcases[i]);
@@ -102,17 +127,39 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
             if(res.output == output[i])arr1[i]=1;
             else break;
         }
+
+        //if you have reached this point and setTimeout doesnt execute, terminate the timeout command
+        clearTimeout(timeout);
+
+        //if tle then break from function immediately
+        if(tle)return;
+
         if(countOccurrences(arr1,0)==0){
-            changeProblemStatus(details1._id,2)
-            .then(res => {
+            if(!JSON.parse(localStorage.getItem('userData')).problems_solved.includes(details1._id)){
+                changeProblemStatus(JSON.parse(localStorage.getItem('userData'))._id,details1._id,1)
+                .then(res => {
+                    var obj1 = JSON.parse(localStorage.getItem('userData'));
+                    obj1.problems_solved.push(details1._id);
+                    localStorage.removeItem('userData');
+                    localStorage.setItem('userData',JSON.stringify(obj1));
+                    toast({
+                        title:"Problem solved!",
+                        status:"success",
+                        duration:5000,
+                        isClosable:true,
+                    });
+                })
+                .catch(e => console.error(e.message));
+            }
+            else{
                 toast({
                     title:"Problem solved!",
+                    description:"Already solved",
                     status:"success",
                     duration:5000,
                     isClosable:true,
                 });
-            })
-            .catch(e => console.error(e.message));
+            }
         }
         setArr(arr1);
         setLoading1(false);

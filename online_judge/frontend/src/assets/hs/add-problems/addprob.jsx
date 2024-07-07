@@ -3,8 +3,10 @@ import { useState,useEffect } from 'react';
 import { sendDataFromFrontendToUser1 } from './api-link-ps';
 import './addprob.css'
 import { useNavigate } from 'react-router-dom';
+import { Button,ChakraProvider } from '@chakra-ui/react';
 
 export function AddProb(){
+    const [l,sl] = useState(false);
     const curr_mode = localStorage.getItem('curr-theme');
     const [state,setState] = useState(curr_mode?curr_mode:'lightmode');
     const [kolor,setKolor] = useState('');
@@ -42,27 +44,31 @@ export function AddProb(){
     const handleSubmit = async (e)=>{
         //prevent default refreshing behavior
         e.preventDefault();
+        sl(true);
 
         const response = await sendDataFromFrontendToUser1(details);
         //console.log(response);
 
-        navigate('/ps');
+        setTimeout(()=>{
+            sl(false);
+            navigate('/ps');
+        },2000);
     }
 
     return(
         <>
-        <div className={`container66 ${state}`}>
+        <div className={`container636 ${state}`}>
             <Navbar state={state} setState={setState}/>
-            <h1 className={`${kolor}`}>Welcome to the problemsetting Page</h1>
+            <h1 className={`${kolor} ty`}>Welcome to the problemsetting Page</h1>
             <p className={`${kolor}`}>Some basic guidelines to follow:</p>
             <ol type="1" className={`guidelines ${kolor}`}>
-                <li>Please try to add a problem of rating not less than 500 (equivalent of 800 on Codeforces)</li>
-                <li>Mention the problem statement clearly keeping in mind the various doubts contestant might have on reading the problem for the first time</li>
-                <li>The constraints on this platform are - time-1s and space-256MB per test. So design your problem keeping that in mind.</li>
-                <li>At least 3 sample test-cases and their outputs to be provided.</li>
-                <li>At least 20 hidden test-cases and their outputs to be provided.</li>
-                <li>Tag(s) should be accompanied with a problem in order of priority.</li>
-                <li>Provide one-liner input and output description if possible</li>
+                <li className='pointers'>Please try to add a problem of rating not less than 500 (equivalent of 800 on Codeforces)</li>
+                <li className='pointers'>Mention the problem statement clearly keeping in mind the various doubts contestant might have on reading the problem for the first time</li>
+                <li className='pointers'>The constraints on this platform are - time-1s and space-256MB per test. So design your problem keeping that in mind.</li>
+                <li className='pointers'>At least 3 sample test-cases and their outputs to be provided.</li>
+                <li className='pointers'>At least 20 hidden test-cases and their outputs to be provided.</li>
+                <li className='pointers'>Tag should be accompanied with a problem in order of its priority.</li>
+                <li className='pointers'>Provide one-liner input and output description if possible</li>
             </ol>
             <p id='greeting' className={`${kolor}`}>Happy Problem Creation!</p>
             <form onSubmit={handleSubmit}>
@@ -99,7 +105,7 @@ export function AddProb(){
                 <div className="fb6">
                     <input required input="text" placeholder="Problem name" name='problem_name'  className='textbox' onChange={handleChange}/>
                 </div>
-                <button type="submit" className='buttonn'>Add problem</button>
+                <Button type="submit" className='buttonn' isLoading={l}>Add problem</Button>
             </form>
         </div>
         </>

@@ -1,13 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const User1 = require('../problem-set/problemSchema.js')
+const User = require('../database/user.js')
 
 router.post('/',async(req,res)=>{
     try {
-        const {id,newStatus} = req.body;
-        console.log(id);
+        const {id,problem_id,newStatus} = req.body;
+        console.log('yahans');
         console.log(newStatus);
-        const user11 = await User1.updateOne({_id:id},{$set:{problem_status:newStatus}});
+        console.log(problem_id);
+        var user11;
+        if(newStatus){
+            console.log('lol');
+            user11 = await User.updateOne({_id:id},{$push:{problems_solved:problem_id}});
+        }
+        else{
+            console.log('lol1');
+            user11 = await User.updateOne({_id:id},{$pop:{problems_solved:problem_id}});
+        }
         res.status(200).send({
             message:"Status change success",
             success:true,
