@@ -12,6 +12,7 @@ export const DropdownMenu = ()=>{
     const logOut = ()=>{
         localStorage.clear();
         navigate('/login');
+        //success
     }
     return(
         <>
