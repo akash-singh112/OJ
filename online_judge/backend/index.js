@@ -2,8 +2,8 @@ const express = require('express');
 const {DBConnection} = require('./database/db.js');
 const dotenv = require('dotenv');
 const User = require('./database/user.js');
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser')
 const cors = require('cors');
 const AddProb = require('./routes/addprobb.js');
@@ -14,7 +14,8 @@ const updateProblem = require('./routes/update-problem.js');
 const getting = require('./routes/getforshow.js');
 const statusChangeCode = require('./routes/changeStatus.js');
 const getbyName = require('./routes/getviaName.js');
-const updateUser = require('./routes/updateUser.js')
+const updateUser = require('./routes/updateUser.js');
+const updatePass = require('./routes/updatePass.js')
 dotenv.config();
 
 //run on http://localhost:port/{ur_wish}
@@ -132,7 +133,8 @@ app.use('/updaterecord',updateProblem);
 app.use('/getforshow',getting);
 app.use('/changestatus',statusChangeCode);
 app.use('/fetchbyname',getbyName);
-app.use('/updateuserinfo',updateUser)
+app.use('/updateuserinfo',updateUser);
+app.use('/changepass',updatePass);
 
 app.get('/:universalURL',(req,res)=>{
     res.send("Status 404 : URL not found");

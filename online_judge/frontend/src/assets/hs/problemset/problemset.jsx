@@ -5,6 +5,7 @@ import {fetchDataFromDatabase} from './apilinkps.js'
 import { MdDelete,MdOutlineUpdate } from "react-icons/md";
 import { deleteDataFromDatabase } from './delprob_api.js';
 import { useNavigate,Link } from "react-router-dom";
+import { useToast } from '@chakra-ui/react'
 
 export const Problemset = ()=>{
     const curr_mode = localStorage.getItem('curr-theme');
@@ -13,6 +14,7 @@ export const Problemset = ()=>{
     const [kolor,setKolor] = useState('');
     const [bc,setBc] = useState('');
     const navigate = useNavigate();
+    const toast = useToast();
 
     useEffect(()=>{
         localStorage.setItem('curr-theme',state);
@@ -28,6 +30,17 @@ export const Problemset = ()=>{
     console.log('lol',details);
 
     const handleDelete = async (name)=>{
+        if(!JSON.parse(localStorage.getItem('userData')).admin){
+            toast({
+                title:"Not an admin",
+                description:"Please login as admin to delete a problem",
+                status:"warning",
+                duration:2000,
+                isClosable:true,
+            });
+            return;
+        }
+
         if(confirm('Please confirm deletion'))
         {
             const response = await deleteDataFromDatabase(name);
@@ -37,6 +50,16 @@ export const Problemset = ()=>{
     }
 
     const sendName = (name)=>{
+        if(!JSON.parse(localStorage.getItem('userData')).admin){
+            toast({
+                title:"Not an admin",
+                description:"Please login as admin to update a problem",
+                status:"warning",
+                duration:2000,
+                isClosable:true,
+            });
+            return;
+        }
         localStorage.setItem('sendUpdateName',name);
         navigate('/updaterecord');
     }

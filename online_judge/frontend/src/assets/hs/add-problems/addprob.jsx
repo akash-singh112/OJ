@@ -75,7 +75,7 @@ export function AddProb(){
                 <div className="fb1">
                     <textarea required placeholder='Tag(s) (comma seperated)' className='textbox' name='tags' onChange={handleChange}></textarea>
                     <br />
-                    <input required type="text" placeholder='Difficulty' name='difficulty' className='textbox'onChange={handleChange}/>
+                    <input required type="text" min={"500"} max={"5000"} placeholder='Difficulty' name='difficulty' className='textbox'onChange={handleChange}/>
                     <br />
                 </div>
                 <div className="fb2">

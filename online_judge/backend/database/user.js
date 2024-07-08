@@ -34,7 +34,11 @@ const userSchema = new mongoose.Schema({
     state:String,
     zipcode:String,
     dob:String,
-    contact_no:String
+    contact_no:String,
+    admin:{
+        type:Boolean,
+        default:false
+    }
 })
 
 module.exports = mongoose.model('User',userSchema);

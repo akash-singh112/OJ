@@ -83,7 +83,7 @@ export const EditUser = ()=>{
                         <p className={`${kolor}`}>The following fields are read-only: Firstname, Middlename, Lastname, Email-ID</p>
                         <br />
                         <input className={`ip-fields-up`} type="text" name="firstname" id="" value={JSON.parse(localStorage.getItem('userData')).firstname} readOnly={true} onChange={handleChange}/>
-                        <span><FaUserAlt size={"20px"} className={`icons23_name`}/></span>
+                        <span><FaUserAlt id='user6777' size={"20px"} className={`icons232`}/></span>
                         <br />
                         <br />
                         <input type="text" className={`ip-fields-up`} placeholder='Middle Name' name="middlename" id="" value={JSON.parse(localStorage.getItem('userData')).middlename} readOnly={true}/>
@@ -93,12 +93,12 @@ export const EditUser = ()=>{
                         <br />
                         <br />
                         <input type="text" className={`ip-fields-up`} name="emailid" id="" value={JSON.parse(localStorage.getItem('userData')).email} readOnly={true}/>
-                        <span><MdEmail size={"20px"} className={`icons22_email`}/></span>
+                        <span><MdEmail id='email6777' size={"20px"} className={`icons232`}/></span>
                         <br />
                         <br />
                         <p className={`${kolor}`}>Permanent address</p>
                         <input defaultValue={JSON.parse(localStorage.getItem('userData')).address_line1} type="text" required onChange={handleChange} name="address_line1" id="" className={`ip-fields-up1`} placeholder='Address Line 1'/>
-                        <AiFillHome size={"20px"} className='icons24_home'/>
+                        <AiFillHome id='home6777' size={"20px"} className='icons232'/>
                         <input defaultValue={JSON.parse(localStorage.getItem('userData')).address_line2} type="text" onChange={handleChange} name="address_line2" id="t66" className={`ip-fields-up1`} placeholder='Address Line 2'/>
                         <br />
                         <br />
@@ -112,7 +112,7 @@ export const EditUser = ()=>{
                         <br />
                         <p className={`${kolor}`}>Other details</p>
                         <input defaultValue={JSON.parse(localStorage.getItem('userData')).dob} type="text" required onChange={handleChange} name="dob" id="" className={`ip-fields-up`} placeholder='Date of birth(dd/mm/yy)'/>
-                        <CiCalendarDate size={"28px"} className='icons25_cal'/>
+                        <CiCalendarDate id='cal6777' size={"28px"} className='icons232'/>
                         <input defaultValue={JSON.parse(localStorage.getItem('userData')).contact_no} type="text" required onChange={handleChange} name="contact_no" id="t89" className={`ip-fields-up`} placeholder='Contact number(country code followed by number)'/>
                         <FaPhone size={"20px"} className='icons26_phone'/>
                         <br />
