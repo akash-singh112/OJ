@@ -15,7 +15,7 @@ const getting = require('./routes/getforshow.js');
 const statusChangeCode = require('./routes/changeStatus.js');
 const getbyName = require('./routes/getviaName.js');
 const updateUser = require('./routes/updateUser.js');
-const updatePass = require('./routes/updatePass.js')
+const updatePass = require('./routes/updatePass.js');
 dotenv.config();
 
 //run on http://localhost:port/{ur_wish}
@@ -138,7 +138,7 @@ app.use('/changepass',updatePass);
 
 app.get('/:universalURL',(req,res)=>{
     res.send("Status 404 : URL not found");
-    res.end()
+    res.end();
 })
 
 app.listen(process.env.port,()=>{
