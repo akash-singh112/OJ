@@ -5,7 +5,7 @@ import { FaLockOpen } from "react-icons/fa";
 import './password.css'
 import { useState,useEffect } from 'react';
 import {Button, useToast} from "@chakra-ui/react"
-import { APICall } from '../../../../backend/api_call.js';
+import { APICall } from './api_call.js';
 
 export const ChangePassword = ()=>{
     const curr_mode = localStorage.getItem('curr-theme');
