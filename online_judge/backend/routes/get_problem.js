@@ -1,5 +1,5 @@
 const express = require('express');
-const User1 = require('../../../backend/problem-set/problemSchema.js') ;
+const User1 = require('../problem-set/problemSchema.js') ;
 const router = express.Router();
 
 router.post('/',async(req,res)=>{
