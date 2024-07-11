@@ -16,7 +16,7 @@
     "react-simple-code-editor": "^0.13.1",
     "uuid": "^10.0.0"
   },
-  "name": "online-judge",
+  "name": "online_judge",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
