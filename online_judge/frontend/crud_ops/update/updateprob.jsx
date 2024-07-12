@@ -3,9 +3,11 @@ import { useState,useEffect } from 'react';
 import { UpdateData } from './api-link-update';
 import { getProblem } from './get_prob._api';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@chakra-ui/react';
 import './updateprob.css'
 
 export function UpdateRecord(){
+    const [l,sl] = useState(false);
     const curr_mode = localStorage.getItem('curr-theme');
     const [state,setState] = useState(curr_mode?curr_mode:'lightmode');
     const [kolor,setKolor] = useState('');
@@ -31,10 +33,12 @@ export function UpdateRecord(){
     const handleSubmit = async (e)=>{
         //prevent default refreshing behavior
         e.preventDefault();
+        sl(true);
 
         const response = await UpdateData(details);
 
         setResult(response.message);
+        sl(false);
         navigate('/ps');
     }
 
@@ -55,9 +59,9 @@ export function UpdateRecord(){
 
     return(
         <>
-        <div className={`container66 ${state}`}>
+        <div className={`container636 ${state}`}>
             <Navbar state={state} setState={setState}/>
-            <h1 className={`${kolor}`}>Welcome to the Update Page</h1>
+            <h1 className={`${kolor} ty`}>Welcome to the Update Page</h1>
             <p className={`${kolor}`}>Some basic guidelines to follow:</p>
             <ol type="1" className={`guidelines ${kolor}`}>
                 <li>Please try to add a problem of rating not less than 500 (equivalent of 800 on Codeforces)</li>
@@ -103,9 +107,8 @@ export function UpdateRecord(){
                 <div className="fb6">
                     <input required input="text" placeholder="Problem name" name='problem_name'  className='textbox' onChange={handleChange} defaultValue={details.problem_name} />
                 </div>
-                <button type="submit" className='buttonn'>Update problem</button>
+                <Button type="submit" className='buttonn' isLoading={l}>Make changes</Button>
             </form>
-            <p className={`success_message ${kolor}`}>{result}</p>
         </div>
         </>
     )

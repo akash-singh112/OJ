@@ -69,12 +69,12 @@
 }
 
 .buttonn{
-    margin-left: 36vw;
+    margin-left: 36.5vw;
     width: 400px;
     height: 55px;
     align-items: center;
     background: beige;
-    border:none;
+    border:0;
     outline:none;
     border-radius: 40px;
     cursor: pointer;
