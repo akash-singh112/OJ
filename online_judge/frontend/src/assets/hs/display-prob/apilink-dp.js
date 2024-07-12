@@ -4,7 +4,7 @@ const api_url = 'http://localhost:8800';
 
 export const fetchbyID = async (id) =>{
     try {
-        const response = await axios.post(`${api_url}/getforshow`,id);
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL||api_url}/getforshow`,id);
         //console.log('outputting response.data');
         console.log(response);
         return response;

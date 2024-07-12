@@ -4,7 +4,7 @@ const api_url = 'http://localhost:8800';
 
 export const sendDataFromFrontendToUser1 = async (details) =>{
     try {
-        const response = await axios.post(`${api_url}/addprob`,details);
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL||api_url}/addprob`,details);
         console.log('outputting response');
         console.log(response);
         return response.data;

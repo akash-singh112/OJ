@@ -4,7 +4,7 @@ const api_url = 'http://localhost:8800';
 
 export const fetchDataFromDatabase = async () =>{
     try {
-        const response = await axios.get(`${api_url}/ps`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL||api_url}/ps`);
         //console.log('outputting response.data');
         console.log(response.data.data);
         return response.data.data;

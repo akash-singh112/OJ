@@ -4,7 +4,7 @@ const api_url = 'http://localhost:8800';
 
 export const UpdateData = async (details) =>{
     try {
-        const response = await axios.post(`${api_url}/updaterecord`,details);
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL||api_url}/updaterecord`,details);
         console.log('outputting response');
         console.log(response);
         return response.data;
