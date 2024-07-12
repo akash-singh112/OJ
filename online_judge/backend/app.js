@@ -142,6 +142,6 @@ app.get('/:universalURL',(req,res)=>{
 })
 
 app.listen(process.env.PORT,()=>{
-    console.log(`Server is listening to port ${process.env.port}`);
+    console.log(`Server is listening to port ${process.env.PORT}`);
 })
 
