@@ -26,7 +26,6 @@ export const DisplayProb = ()=>{
         fetchbyID(id)
         .then(res => {
             setDetails1(res.data.data[0]);
-            console.log('logging data');
         })
         .catch(e => e.message);
     },[])

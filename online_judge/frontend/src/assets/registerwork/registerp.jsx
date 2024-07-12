@@ -29,7 +29,7 @@ export function Register() {
     setDetails(prev => {
       return {...prev,[name]:value};
     });
-    console.log(e);
+    //
   }
 
   const handleClick = async (e) => {
@@ -37,10 +37,8 @@ export function Register() {
     e.preventDefault();
 
     setLoading(true);
-    console.log(details);
     
     const response = await sendDataFromFrontendToBackend(details);
-    console.log(response);
 
     setTimeout(()=>{
       setLoading(false)

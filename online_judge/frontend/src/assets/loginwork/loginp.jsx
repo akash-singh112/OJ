@@ -24,8 +24,7 @@ export function Login() {
     setDetails(prev=>{
       return {...prev,[name]:value};
     })
-    //console.log('yahan hu1');
-    //console.log(details);
+    //
   }
 
   const handleSubmit = async (e)=>{
@@ -37,7 +36,7 @@ export function Login() {
     const box1 = document.getElementById('rang');
     localStorage.setItem('login',false);
     if(response && response.message){
-      console.log(response.userData);
+      //
       localStorage.setItem('login',true);
       localStorage.setItem('userData',JSON.stringify(response.userData))
       setResult(response.message);

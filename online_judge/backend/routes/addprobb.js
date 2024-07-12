@@ -6,16 +6,12 @@ router.post('/',async (req,res)=>{
     try {
         let {tags,difficulty,problem_name,description,value_constraints,input_description,output_description,sampleTestCases,outputOfSampleTestCases,hiddenTestCases,outputOfHiddenTestCases} = req.body;
         
-        //console.log('yahan1111111');
         sampleTestCases = sampleTestCases.split(',')
         outputOfSampleTestCases = outputOfSampleTestCases.split(',')
         hiddenTestCases = hiddenTestCases.split(',')
         outputOfHiddenTestCases = outputOfHiddenTestCases.split(',')
         value_constraints = value_constraints.split(',')
         tags = tags.split(',');
-
-        //console.log(sampleTestCases);
-        //console.log(outputOfSampleTestCases);
         
         User1.createProblem({
             tags:tags,
@@ -32,8 +28,6 @@ router.post('/',async (req,res)=>{
         });
 
         const added_prob = await User1.where('problem_name').equals(problem_name).limit(1);
-
-        console.log('Added prob',added_prob);
 
     res.status(200).json({message:'Problem addition successful!',
         success:true,

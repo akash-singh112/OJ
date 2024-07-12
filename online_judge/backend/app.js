@@ -18,7 +18,6 @@ const updateUser = require('./routes/updateUser.js');
 const updatePass = require('./routes/updatePass.js');
 dotenv.config();
 
-//run on http://localhost:port/{ur_wish}
 const app = express();
 
 //add middlewares
@@ -32,12 +31,15 @@ app.get('/home',(req,res)=>{
     res.end();
 });
 
+app.get('/',(req,res)=>{
+    res.send('You are at slash route');
+})
+
 DBConnection();
 
 app.post('/register',async (req,res)=>{
     try {
         //get all details of user from user-> stored in req.body
-        //console.log(req);
         const {firstname,middlename,lastname,email,password} = req.body;
 
         //check for empty fields:if any then give flag
@@ -46,8 +48,8 @@ app.post('/register',async (req,res)=>{
         }
 
         //check if user already exists in DB
-        const ifExisting = await User.findOne({email})//as email parameter is set to unique
-        //console.log(ifExisting);
+        const ifExisting = await User.findOne({email});
+
         if(ifExisting){
             return res.send('This user already exists! Please try to login');
         }
@@ -74,7 +76,7 @@ app.post('/register',async (req,res)=>{
         //200 => successful
         res.status(200).json({message : 'Registration successful' , user1});
     } catch (error) {
-        console.log(error.message);
+        console.error(error.message);
     }
 
 })
@@ -120,8 +122,7 @@ app.post('/login',async (req,res)=>{
         });
 
     } catch (error) {
-        //console.log('galat hai aap');
-        console.log(error.message);
+        console.error(error.message);
     }
 })
 

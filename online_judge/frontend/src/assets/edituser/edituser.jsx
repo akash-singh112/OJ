@@ -38,7 +38,7 @@ export const EditUser = ()=>{
         setInput(prev => {
           return {...prev,[name]:value};
         });
-        console.log(e);
+        //
       }
 
     const handleUpdateQuery = async(e)=>{

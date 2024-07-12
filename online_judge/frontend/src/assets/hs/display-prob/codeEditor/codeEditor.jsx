@@ -27,9 +27,7 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
     },[state])
 
     const handleChange = (e)=>{
-        //console.log('yahaaan');
         setCode(e);
-        //console.log(e);
     }
 
     const handleMount = (editor)=>{
@@ -68,7 +66,6 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
             clearTimeout(timeout);
             if(tle)return;
 
-            console.log(res);
             (res.message === 'Running success' ? setErr(false) : setErr(true));
             if(res.message === 'Running success'){
                 setOutput(res.output.split('\r\n'))
@@ -121,9 +118,7 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
 
         for(let i=0;i<n;i++){
             const res = await runCode(code,lang,testcases[i]);
-            console.log(testcases[i]);
-            console.log(res);
-            console.log(res.output);
+            //
             if(res.output == output[i])arr1[i]=1;
             else break;
         }
@@ -180,8 +175,6 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
                 s += element + '\n';
             })) : (s = errmsg)
         ) : (arr.map((element,id)=>{
-            //console.log('logging arr element');
-            //console.log(element);
             if(element===1){
                 s += `Testcase ${id+1} passed\n`;
             }

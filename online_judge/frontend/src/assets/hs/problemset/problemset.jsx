@@ -27,7 +27,6 @@ export const Problemset = ()=>{
         .then(res => setDetails(res))
         .catch(e => console.error(e.message));
     },[]);
-    console.log('lol',details);
 
     const handleDelete = async (name)=>{
         if(!JSON.parse(localStorage.getItem('userData')).admin){

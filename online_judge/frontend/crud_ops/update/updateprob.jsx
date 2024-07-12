@@ -26,8 +26,7 @@ export function UpdateRecord(){
         setDetails(prev=>{
         return {...prev,[name]:value};
         })
-        console.log('yahan hu1');
-        console.log(details);
+        //
     }
 
     const handleSubmit = async (e)=>{
@@ -43,7 +42,7 @@ export function UpdateRecord(){
     }
 
     useEffect(()=>{
-        console.log(localStorage.getItem('sendUpdateName'));
+        //
         getProblem(localStorage.getItem('sendUpdateName'))
         .then(res => {
             res.data.data.tags.join(',');

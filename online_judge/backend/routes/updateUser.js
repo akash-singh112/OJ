@@ -15,8 +15,6 @@ router.post('/',async(req,res)=>{
         id:id
     } = req.body;
 
-    console.log(id);
-
     try {
         const result = await User.updateOne({_id:id},{$set:{
             address_line1:address_line1,
@@ -28,7 +26,7 @@ router.post('/',async(req,res)=>{
             dob:dob,
             contact_no:contact_no
         }});
-        console.log(result);
+
         res.status(200).send({
             message:"Updation success",
             success:true,

@@ -19,7 +19,7 @@ User1.createProblem({
 
 const run = async ()=>{
     const entry = await User1.findbyName('Valid Palindrome');
-    console.log(entry);
+    //console.log(entry);
 }
 
 run();

@@ -37,8 +37,7 @@ export function AddProb(){
         setDetails(prev=>{
         return {...prev,[name]:value};
         })
-        console.log('yahan hu1');
-        console.log(details);
+        //
     }
 
     const handleSubmit = async (e)=>{
@@ -47,7 +46,6 @@ export function AddProb(){
         sl(true);
 
         const response = await sendDataFromFrontendToUser1(details);
-        //console.log(response);
 
         setTimeout(()=>{
             sl(false);

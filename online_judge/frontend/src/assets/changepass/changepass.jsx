@@ -27,7 +27,7 @@ export const ChangePassword = ()=>{
         setPass(prev => {
           return {...prev,[name]:value};
         });
-        console.log(e);
+        //
       }
 
     useEffect(()=>{
@@ -37,8 +37,6 @@ export const ChangePassword = ()=>{
 
     const handleSubmit = async()=>{
         setLoads(true);
-        console.log(pass.cp);
-        console.log(pass.np);
 
         const res = await APICall('changepass',{id:JSON.parse(localStorage.getItem('userData'))._id,currentPass:pass.cp,newPass:pass.np});
         if(!res){

@@ -32,8 +32,6 @@ router.post('/',async(req,res)=>{
 
         const added_prob = await User1.where('problem_name').equals(problem_name).limit(1);
 
-        console.log('Added prob',added_prob);
-
         res.status(200).json({message:'Problem addition successful!',
             success:true,
             data:added_prob
