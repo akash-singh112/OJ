@@ -5,7 +5,7 @@ const api_url = 'http://localhost:6005';
 export const runCode = async (code,lang,input) =>{
     try {
         const payload  = {code:code,lang:lang,input:input};
-        const response = await axios.post(import.meta.env.VITE_AWS_URL||api_url,payload);
+        const response = await axios.post(`${import.meta.env.VITE_COMPILER_URL||api_url}/runcode`,payload);
         //console.log('outputting response.data');
         console.log(response.data);
         return response.data;
