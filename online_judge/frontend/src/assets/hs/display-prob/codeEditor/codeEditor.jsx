@@ -114,7 +114,7 @@ export const CodeEditor = ({state,setState,details1,setDetails1}) => {
         const arr1 = [...Array(details1.hiddenTestCases.length)].fill(0);
 
         //start the timer for execution
-        const timeout = setTimeout(TLEVerdict,3*details1.hiddenTestCases.length);
+        const timeout = setTimeout(TLEVerdict,3*details1.hiddenTestCases.length);//
 
         for(let i=0;i<n;i++){
             const res = await runCode(code,lang,testcases[i]);
