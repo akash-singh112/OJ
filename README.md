@@ -84,5 +84,5 @@ to discuss what you would like to change.
   
 ## Contact me
 * GitHub: [akash-singh112](https://github.com/akash-singh112)
-* Linkedin: [Akash Singh](www.linkedin.com/in/akashsinghiitr)
+* Linkedin: [Akash Singh](https://linkedin.com/in/akashsinghiitr)
 * Email: akash_s@me.iitr.ac.in
